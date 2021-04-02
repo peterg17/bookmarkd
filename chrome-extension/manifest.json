@@ -2,9 +2,9 @@
   "name": "My Bookmarks",
   "description": "Popup dump of all my bookmarks",
   "version": "1.0",
-  "manifest_version": 2,
-  "permissions": ["bookmarks"],
-  "browser_action": {
+  "manifest_version": 3,
+  "permissions": ["bookmarks", "webRequest"],
+  "action": {
     "default_popup": "popup.html",
     "default_icon": {
       "16": "/images/get_started16.png",
@@ -12,6 +12,5 @@
       "48": "/images/get_started48.png",
       "128": "/images/get_started128.png"
     }
-  },
-  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'"
+  }
 }

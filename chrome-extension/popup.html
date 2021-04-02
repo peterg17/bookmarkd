@@ -1,9 +1,18 @@
 <html>
 <head>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+  <script src="./jquery-3.6.0.min.js"></script>
   <script src="popup.js"></script>
 </head>
 <body style="width: 400px">
+  <form>
+    <div class="form-group">
+      <label for="string">Filename</label>
+      <input type="text" class="form-control" id="string"
+             placeholder="Enter string">
+    </div>
+    <button type="submit" class="btn btn-primary btn-sm" id="submitButton">Upload</button>
+  </form>
   <div>Search Bookmarks: <input id="search"></div>
   <div id="bookmarks"></div>
   <div id="editdialog"></div>

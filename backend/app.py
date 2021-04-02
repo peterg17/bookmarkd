@@ -1,6 +1,7 @@
 import os
 from flask import Flask, Blueprint, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 import logging
 
 POSTGRES = {
@@ -51,6 +52,7 @@ class User(db.Model):
 
 
 API = Blueprint("", __name__)
+CORS(API)
 
 
 @API.route("/")
@@ -62,9 +64,11 @@ def index():
 def upload():
     log.info("\n\n-----------------------------------------")
     log.info("Uploading Bookmarks\n")
-    formKeys = request.form.keys()
-    file_name = request.form["filename"]
-    log.info("name is: " + file_name)
+    # formKeys = request.form.keys()
+    # file_name = request.form["filename"]
+    json_data = request.json
+    log.info("request json is: " + str(json_data))
+    log.info("file name is: " + json_data["filename"])
     # file_type = request.form["filetype"]
     # file_text = request.form["filedata"]
     return jsonify(success=True)
