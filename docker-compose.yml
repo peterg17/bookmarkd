@@ -1,0 +1,25 @@
+version: '3.3'
+
+services:
+  flask:
+    container_name: flask
+    restart: always
+    build:
+      context: ./backend/
+      dockerfile: Dockerfile
+      command: "./scripts/entrypoint.sh"
+      expose:
+        - "5000"
+      ports:
+        - "5000:5000"
+      volumes:
+        - ./backend/:/app
+
+
+
+
+
+
+
+
+        
