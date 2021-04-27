@@ -19,43 +19,20 @@ SQLALCHEMY_DATABASE_URI = (
 )
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
 
 # set up logging
 logging.basicConfig(format="[%(filename)s:%(lineno)d]\t %(message)s")
 log = logging.getLogger(__name__)
 log.setLevel("INFO")
 
-db = SQLAlchemy(app)
-
-
-class Role(db.Model):
-    __tablename__ = "roles"
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(64), unique=True)
-    users = db.relationship("User", backref="role")
-
-    def __repr__(self):
-        return "<Role %r>" % self.name
-
-
-class User(db.Model):
-    __tablename__ = "users"
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), unique=True, index=True)
-    role_id = db.Column(db.Integer, db.ForeignKey("roles.id"))
-
-    def __repr__(self):
-        return "<User %r>" % self.username
-
+db = SQLAlchemy()
 
 API = Blueprint("", __name__)
 CORS(API)
 
 
-@API.route("/")
+@API.route("/", methods=["GET"])
 def index():
     return "<h1>Bookmarkd Landing Page</h1>"
 
@@ -68,10 +45,19 @@ def upload():
     # file_name = request.form["filename"]
     json_data = request.json
     log.info("request json is: " + str(json_data))
-    log.info("file name is: " + json_data["filename"])
+    # log.info("file name is: " + json_data["filename"])
     # file_type = request.form["filetype"]
     # file_text = request.form["filedata"]
     return jsonify(success=True)
 
 
-app.register_blueprint(API, url_prefix="/")
+def create_app():
+    app = Flask(__name__)
+    app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    db.init_app(app)
+    # db.drop_all()
+    # db.create_all()
+    app.register_blueprint(API, url_prefix="/")
+
+    return app

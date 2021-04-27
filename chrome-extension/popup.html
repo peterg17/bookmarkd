@@ -2,9 +2,11 @@
 <head>
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
   <script src="./jquery-3.6.0.min.js"></script>
+  <script src="./d3-4.12.0.min.js"></script>
+  <link rel="stylesheet" href="./graph.css">
   <script src="popup.js"></script>
 </head>
-<body style="width: 400px">
+<body style="width: 800px">
   <form>
     <div class="form-group">
       <label for="string">Filename</label>
@@ -13,10 +15,9 @@
     </div>
     <button type="submit" class="btn btn-primary btn-sm" id="submitButton">Upload</button>
   </form>
-  <div>Search Bookmarks: <input id="search"></div>
   <div id="bookmarks"></div>
-  <div id="editdialog"></div>
-  <div id="deletedialog"></div>
-  <div id="adddialog"></div>
+  <svg width="750" height="600"></svg>
+
+  <!-- <div>Search Bookmarks: <input id="search"></div> -->
 </body>
 </html>
