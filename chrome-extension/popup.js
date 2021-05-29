@@ -83,10 +83,10 @@ document.addEventListener("DOMContentLoaded", function () {
   button.addEventListener("click", function (e) {
     e.preventDefault();
     // const data = { filename: mockStr };
-    var bookmarks = chrome.bookmarks.getTree(function (bookmarks) {
+    chrome.bookmarks.getTree(function () {
       // console.log(`bookmarks tree node is: ${JSON.stringify(bookmarks)}`);
       // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-      fetch("http://localhost:5050/upload", {
+      fetch("http://localhost:5050/api/v1/bookmarks", {
         method: "POST", // or 'PUT'
         headers: {
           "Content-Type": "application/json",
